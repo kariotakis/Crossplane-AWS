@@ -1,0 +1,52 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-ec2
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-ec2:v0.36.0
+
+
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: myvpc3325-1
+  labels:
+    csd: mycsd3325-vpc
+spec:
+  forProvider:
+    cidrBlock: 11.0.0.0/16
+    region: eu-central-1
+
+
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: mysub-3325-1
+  labels:
+    csd: mycsd3325-sub1
+spec:
+  forProvider:
+    availabilityZone: eu-central-1a
+    cidrBlock: 11.0.32.0/20
+    region: eu-central-1
+    vpcIdSelector:
+      matchLabels:
+        csd: mycsd3325-vpc
+
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: mysub2-3325-2
+  labels:
+    csd: mycsd3325-sub2
+spec:
+  forProvider:
+    availabilityZone: eu-central-1b
+    cidrBlock: 11.0.0.0/20
+    region: eu-central-1
+    vpcIdSelector:
+      matchLabels:
+        csd: mycsd3325-vpc

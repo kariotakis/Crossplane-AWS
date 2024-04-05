@@ -1,0 +1,25 @@
+#replace autoscalingGroupName from AWS Portal
+
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-autoscaling
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-autoscaling:v0.47.1
+
+
+
+
+apiVersion: autoscaling.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: plc35
+spec:
+  forProvider:
+    region: eu-central-1
+    autoscalingGroupName: eks-t2-14c6c0ad-9ede-f307-8eaf-727fea2b9e98
+    policyType: TargetTrackingScaling
+    targetTrackingConfiguration:
+      - targetValue: 35
+        predefinedMetricSpecification:
+          - predefinedMetricType: ASGAverageCPUUtilization

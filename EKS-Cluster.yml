@@ -1,0 +1,16 @@
+#Replace subnet ids & RoleArn
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    csd: csd3325
+  name: csd3325eks
+spec:
+  forProvider:
+    region: eu-central-1
+    roleArn: arn:aws:iam::870488731337:role/eksClusterRole
+    vpcConfig:
+      - subnetIds: 
+        - subnet-0a921fc9d7a7465dd
+        - subnet-050833b9f89bed029

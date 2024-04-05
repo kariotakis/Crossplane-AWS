@@ -1,0 +1,23 @@
+#Replace subnet ids & RoleArn
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: NodeGroup
+metadata:
+  name: t2
+  labels:
+    csd: csd3325-ng
+spec:
+  forProvider:
+    clusterNameRef:
+      name: csd3325eks
+    instanceTypes : 
+      - t2.micro
+    nodeRoleArn: arn:aws:iam::870488731337:role/eksClusterRole
+    region: eu-central-1
+    scalingConfig:
+      - desiredSize: 1
+        maxSize: 3
+        minSize: 1
+    subnetIds:
+      - subnet-0a921fc9d7a7465dd
+      - subnet-050833b9f89bed029
